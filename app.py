@@ -60,8 +60,6 @@ def getImage():
 	#returns image url to processImage method
 	return img_url
 
-def serve_pil_image(pil_img):
+def handlingImage(pil_img):
     img_io = StringIO.StringIO()
-    # pil_img.save(img_io, 'JPG')
-    # img_io.seek(0)
     return send_file(img_io, mimetype='image/jpeg')
