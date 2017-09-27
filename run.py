@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 from flask import Flask, send_file
 # from app import prcoessImage, getQuote, getImage
 from app import *

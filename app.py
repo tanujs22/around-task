@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 from PIL import Image, ImageDraw, ImageFont
 import requests, textwrap, csv, random
 
