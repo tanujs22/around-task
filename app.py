@@ -16,7 +16,7 @@ def prcoessImage(img, quote, qfont=_quote_font, afont=_author_font):
 	filter = Image.new("RGBA", im.size, (62, 39, 35, 127))
 	im.paste(filter, None, filter)
 	#tweaking text
-	quoteText = textwrap.wrap(quote['quote'], width = 20)
+	quoteText = textwrap.wrap(quote['quote'], width = 25)
 	quoteAuthor = quote['author']
 	#writing text
 	draw = ImageDraw.Draw(im)
@@ -46,4 +46,13 @@ def getQuote():
 	qu = {'author' : quote_auth['author'], 'quote' : quote_auth['quote']}
 	return qu
 
-prcoessImage(requests.get('https://pixabay.com/get/ef31b10929f31c2ad65a5854e0494395e370e6c818b4114791f9c379a2e5_640.jpg', stream=True).raw, getQuote())
+def getImage():
+	num = random.randint(1,10)
+	url = 'https://pixabay.com/api/?key=6553074-1b6f2bc332fcf4f5589fcc559&q=landscape&image_type=photo&pretty=true&page=%s' % num
+	page = requests.get(url)
+	data = page.json()
+	pick_url = random.randint(1,20)
+	img_url = data['hits'][pick_url]['webformatURL']
+	return img_url
+
+prcoessImage(requests.get(getImage(), stream=True).raw, getQuote())
