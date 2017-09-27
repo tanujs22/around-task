@@ -47,12 +47,14 @@ def getQuote():
 	return qu
 
 def getImage():
+	#random page selection
 	num = random.randint(1,10)
 	url = 'https://pixabay.com/api/?key=6553074-1b6f2bc332fcf4f5589fcc559&q=landscape&image_type=photo&pretty=true&page=%s' % num
 	page = requests.get(url)
 	data = page.json()
 	pick_url = random.randint(1,20)
 	img_url = data['hits'][pick_url]['webformatURL']
+	#returns image url to processImage method
 	return img_url
 
 prcoessImage(requests.get(getImage(), stream=True).raw, getQuote())
