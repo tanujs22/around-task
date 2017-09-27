@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 from PIL import Image, ImageDraw, ImageFont
-import requests, textwrap, csv, random
-
+import requests, textwrap, csv, random, StringIO
+from flask import send_file
 
 _quote_font = ImageFont.truetype('Lato-Regular.ttf', 24)
 _author_font = ImageFont.truetype('Lato-Regular.ttf', 14)
@@ -51,11 +51,17 @@ def getQuote():
 #method to fetch image
 def getImage():
 	#random page selection
-	num = random.randint(1,10)
+	num = random.randint(1,5)
 	url = 'https://pixabay.com/api/?key=6553074-1b6f2bc332fcf4f5589fcc559&q=landscape&image_type=photo&pretty=true&page=%s' % num
 	page = requests.get(url)
 	data = page.json()
-	pick_url = random.randint(1,20)
+	pick_url = random.randint(1,10)
 	img_url = data['hits'][pick_url]['webformatURL']
 	#returns image url to processImage method
 	return img_url
+
+def serve_pil_image(pil_img):
+    img_io = StringIO.StringIO()
+    # pil_img.save(img_io, 'JPG')
+    # img_io.seek(0)
+    return send_file(img_io, mimetype='image/jpeg')
