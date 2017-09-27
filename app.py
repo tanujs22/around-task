@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 from PIL import Image, ImageDraw, ImageFont
-import requests, textwrap, csv, random, StringIO
-from flask import send_file
+import requests, textwrap, csv, random, StringIO, base64
+from flask import send_file, render_template
 
 _quote_font = ImageFont.truetype('Lato-Regular.ttf', 24)
 _author_font = ImageFont.truetype('Lato-Regular.ttf', 14)
@@ -59,7 +59,3 @@ def getImage():
 	img_url = data['hits'][pick_url]['webformatURL']
 	#returns image url to processImage method
 	return img_url
-
-def handlingImage(pil_img):
-    img_io = StringIO.StringIO()
-    return send_file(img_io, mimetype='image/jpeg')
