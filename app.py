@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 from PIL import Image, ImageDraw, ImageFont
-import requests, textwrap, csv, random, StringIO, base64
+import requests, textwrap, csv, random, StringIO, base64, io
 from flask import send_file, render_template
 
 _quote_font = ImageFont.truetype('Lato-Regular.ttf', 24)
@@ -31,7 +31,10 @@ def prcoessImage(img, quote, qfont=_quote_font, afont=_author_font):
 	x = x + 20
 	draw.text((x,y), '-'+quoteAuthor, 'white', afont)
 	#displaying image
-	return im.show()
+	byte_io = io.BytesIO()
+	im.save(byte_io, 'PNG')
+	byte_io.seek(0)
+	return byte_io
 
 #method to fetch quotes
 def getQuote():

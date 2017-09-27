@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route('/')
 def requiredImage():
 	image = prcoessImage(requests.get(getImage(), stream=True).raw, getQuote())
-	return send_file(io.BytesIO(image), mimetype = 'image/jpeg')
+	return send_file(image, mimetype = 'image/PNG')
 
 if __name__ == "__main__":
 		app.run()
