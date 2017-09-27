@@ -1,10 +1,11 @@
 from PIL import Image, ImageDraw, ImageFont
 import requests, textwrap, csv, random
 
+
 _quote_font = ImageFont.truetype('Lato-Regular.ttf', 24)
 _author_font = ImageFont.truetype('Lato-Regular.ttf', 14)
 
-#funtion to process image
+#method to process image
 def prcoessImage(img, quote, qfont=_quote_font, afont=_author_font):
 	#opening image for work.
 	im = Image.open(img)
@@ -31,7 +32,7 @@ def prcoessImage(img, quote, qfont=_quote_font, afont=_author_font):
 	#displaying image
 	return im.show()
 
-#function to fetch quotes
+#method to fetch quotes
 def getQuote():
 	#opening csv
 	file = open('good_read.csv', 'rU')
@@ -46,6 +47,7 @@ def getQuote():
 	qu = {'author' : quote_auth['author'], 'quote' : quote_auth['quote']}
 	return qu
 
+#method to fetch image
 def getImage():
 	#random page selection
 	num = random.randint(1,10)
@@ -56,5 +58,3 @@ def getImage():
 	img_url = data['hits'][pick_url]['webformatURL']
 	#returns image url to processImage method
 	return img_url
-
-prcoessImage(requests.get(getImage(), stream=True).raw, getQuote())
