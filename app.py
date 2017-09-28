@@ -12,6 +12,14 @@ def getFont():
 	response['author_font'] = ImageFont.truetype(fnt, 14)
 	return response
 
+def getColor():
+	colorl = ['#F44336', '#9C27B0', '#3F51B5', '#009688', '#607D8B']
+	num = random.randint(0,4)
+	clr = colorl[num]
+	response = {}
+	response['color'] = clr
+	return response
+
 #method to fetch quotes
 def getQuote():
 	#opening csv
@@ -40,7 +48,6 @@ def getImage():
 	pick_url = random.randint(1,10)
 	img_url = data['hits'][pick_url]['webformatURL']
 	#returns image url to processImage method
-	print img_url
 	return img_url
 
 #method to process image
@@ -67,15 +74,16 @@ def prcoessImage(img, quote):
 	fnt = getFont()
 	qfont = fnt['quote_font']
 	afont = fnt['author_font']
+	clr = getColor()
 	draw = ImageDraw.Draw(im)
 	x, y = 20, cropDim/8
 	for text in quoteText:
-		draw.text((x,y), text, 'white', qfont)
+		draw.text((x,y), text, clr, qfont)
 		y = y + 20
 	#writing author
 	y = y + 50
 	x = x + 20
-	draw.text((x,y), '-'+quoteAuthor, 'white', afont)
+	draw.text((x,y), '-'+quoteAuthor, clr, afont)
 	#displaying image
 	byte_io = io.BytesIO()
 	im.save(byte_io, 'PNG')
