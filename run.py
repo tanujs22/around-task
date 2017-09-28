@@ -13,4 +13,5 @@ def requiredImage():
 	return send_file(image, mimetype = 'image/PNG')
 
 if __name__ == "__main__":
+		app.debug = True
 		app.run()
