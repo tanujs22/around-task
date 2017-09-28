@@ -33,7 +33,10 @@ def getImage():
 	num = random.randint(1,5)
 	url = 'https://pixabay.com/api/?key=6553074-1b6f2bc332fcf4f5589fcc559&q=landscape&image_type=photo&pretty=true&page=%s' % num
 	page = requests.get(url)
-	data = page.json()
+	try:
+		data = page.json()
+	except Exception:
+		return 'https://pixabay.com/get/e830b10b29fd063ed95c4518b74a4393e077e5d104b0144193f5c970a0efbc_640.jpg'
 	pick_url = random.randint(1,10)
 	img_url = data['hits'][pick_url]['webformatURL']
 	#returns image url to processImage method
