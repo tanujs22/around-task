@@ -45,7 +45,7 @@ def prcoessImage(img, quote):
 	#opening image for work.
 	im = Image.open(img)
 	width, height = im.size
-	while width < 640:
+	while width < 640 and height < 380:
 		img_url = getImage()
 		img = requests.get(img_url, stream=True).raw
 		im = Image.open(img)
