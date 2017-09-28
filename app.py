@@ -43,17 +43,13 @@ def getImage():
 #method to process image
 def prcoessImage(img, quote):
 	#opening image for work.
-	im = Image.open('fff3.png')
+	im = Image.open(img)
 	width, height = im.size
-	print width
 	while width < 640:
-		print 'reach'
 		img_url = getImage()
-		print img_url
 		img = requests.get(img_url, stream=True).raw
 		im = Image.open(img)
 		width, height = im.size
-	print width, height
 	cropDim = im.size[1]
 	left = (im.size[0]/2) - (cropDim/2)
 	right = (im.size[0]/2) + (cropDim/2)
