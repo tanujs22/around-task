@@ -78,12 +78,12 @@ def prcoessImage(img, quote):
 	draw = ImageDraw.Draw(im)
 	x, y = 20, cropDim/8
 	for text in quoteText:
-		draw.text((x,y), text, clr, qfont)
+		draw.text((x,y), text, clr['color'], qfont)
 		y = y + 20
 	#writing author
 	y = y + 50
 	x = x + 20
-	draw.text((x,y), '-'+quoteAuthor, clr, afont)
+	draw.text((x,y), '-'+quoteAuthor, clr['color'], afont)
 	#displaying image
 	byte_io = io.BytesIO()
 	im.save(byte_io, 'PNG')
